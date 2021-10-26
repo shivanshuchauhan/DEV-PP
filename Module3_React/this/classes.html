@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <button>Print Details</button>
+    <script>
+        class Person{
+           
+            constructor(name , age){
+                //super();//it calls constructor of parent class 
+                //console.log(this);
+                this.name = name;
+                this.age = age;
+                //console.log(this);
+            }
+            getDetails(){
+                console.log(this);
+                console.log(`The name is ${this.name} and age is ${this.age}`);
+            }
+            setDetails(newName , newAge){
+                this.name = newName;
+                this.age = newAge;
+            }
+
+
+        }
+        
+        let steve = new Person("Steve", 100);
+        // console.log(steve);
+        // let fun=steve.getDetails;
+        // fun();//it will display null, but if getDetails is an arrow function it will display steve
+        // let arr=["100","200"];
+        // console.log(arr);
+
+         let btn = document.querySelector("button");
+         
+        btn.addEventListener("click",function(){
+            console.log(this);
+            let fun =steve.getDetails;
+           fun(); //it displays undefined
+           //steve.getDetails();
+           
+        });
+        //btn.addEventListener("click",steve.getDetails);
+        //btn.addEventListener("click",steve.getDetails());
+        
+    </script>
+</body>
+</html>

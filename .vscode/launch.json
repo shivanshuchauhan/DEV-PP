@@ -1,0 +1,14 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "pwa-chrome",
+            "request": "launch",
+            "name": "Open this.html",
+            "file": "c:\\Users\\shiva\\Downloads\\Dev_pp_master_folder\\Dev_PP-master\\Dev_PP-master\\Module3_React\\this\\this.html"
+        }
+    ]
+}

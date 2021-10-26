@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+<script>
+    let obj = {
+        name : "steve" ,
+        sayHi : function(){
+            console.log(this);
+            console.log("Function Says hi !!!!!!");
+            let that =this;
+            function inside(){
+                console.log(that);
+                console.log(this);
+                console.log("Inside function");
+            }
+            inside(); //this is a function call, not a method call.
+        }
+    }
+
+    //function inside a obj is known as method
+    obj.sayHi(); //method call/invoke
+
+    let fun=obj.sayHi;
+    fun();  //function call
+
+    //Simple functions are known as function
+    function callMe(){
+        console.log(this);
+        console.log("Call me function called !!");
+    }
+    callMe(); //function invoke/call
+</script>
+<!-- <script>
+    let obj = {
+        name : "steve" ,
+        sayHi : function(){
+            console.log(this);
+            console.log("Function Says hi !!!!!!");
+            function inside(){
+                console.log(this);
+                console.log("Inside function");
+            }
+            let bindedFunction = inside.bind(obj);
+            inside(); //this is a function call, not a method call.
+            bindedFunction();
+        }
+    }
+    obj.sayHi();
+
+   
+</script> -->
+<!-- <script>
+    let obj = {
+        name : "steve" ,
+        sayHi : function(){
+            console.log(this);
+            console.log("Function Says hi !!!!!!");
+            let that=this;
+            function inside(){
+                console.log(that);
+                console.log("Inside function");
+            }
+            
+            inside(); //this is a function call, not a method call.
+           
+        }
+    }
+    obj.sayHi();
+
+   
+</script> -->
+<!-- <script>
+    let obj = {
+        name: "steve",
+        sayHi : function (){
+            console.log(this); //this will be pointing to current object
+            console.log("Function says hi !!!!!");
+
+            const inside = () => {
+                console.log(this);
+                console.log("Inside function !");
+
+            };
+            inside();
+        },
+    };
+    obj.sayHi();
+</script> -->
+</html>
