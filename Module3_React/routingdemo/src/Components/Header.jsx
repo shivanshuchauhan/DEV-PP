@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {link} from "react-router-dom";
+import {Link} from "react-router-dom";
 
 class Header extends React.Component {
     state = {};
