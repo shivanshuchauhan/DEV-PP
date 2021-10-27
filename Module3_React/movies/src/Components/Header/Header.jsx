@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import "./Header.css"
+import {Link} from "react-router-dom";
 
 class Header extends Component {
     state = {
@@ -26,6 +27,7 @@ class Header extends Component {
                 <div className="logo">
                     <img src="logo.svg" alt=""/>
                 </div>
+                
                 <div className="search-btn">
                     <input 
                         className="search-movies" 
@@ -35,6 +37,15 @@ class Header extends Component {
                         onChange={this.handleOnChange}
                         onKeyPress={this.handleKeyPress}
                     />
+                </div>
+
+                <div className="header-links">
+                    <div className="header-link">
+                        <Link to="/">Home</Link>
+                    </div>
+                    <div>
+                        <Link to="/more">More</Link>
+                    </div>
                 </div>
             </div>
         );

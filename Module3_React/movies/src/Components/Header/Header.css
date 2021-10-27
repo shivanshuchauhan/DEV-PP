@@ -4,6 +4,11 @@
     display: flex;
     justify-content: space-around;
     align-items: center;
+    background: black;
+    position: fixed;
+    width: 100%;
+    z-index: 100;
+    top:0px;
 }
 
 .logo{
@@ -21,8 +26,17 @@
 
 }
 
+
 .search-btn input{
     outline: none;
     border: none;
     text-align:center;
+}
+.header-links {
+    width:20%;
+    display: flex;
+    justify-content:space-evenly
+}
+.header-link {
+    
 }
