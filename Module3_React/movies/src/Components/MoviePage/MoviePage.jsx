@@ -27,7 +27,7 @@ import {API_URL, API_KEY} from "../../API/secrets";
      }
 
      render() { 
-         opts = {
+         const opts = {
              height:"100%",
              width: "100%",
              playerVars: {
