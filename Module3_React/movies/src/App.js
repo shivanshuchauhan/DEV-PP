@@ -106,7 +106,12 @@ class App extends Component {
         <Header setMovies={this.setMovies}></Header>
 
         {/*condition rendering*/}
-        {this.state.moviesData.length ? (
+        <Switch>
+          <Route path="/" exact>
+            <HomeView></HomeView>
+          </Route>
+          <Route path="/more" exact>
+          {this.state.moviesData.length ? (
           <React.Fragment>
             <Movies movies={this.state.moviesData}></Movies>
            <Pagination 
@@ -120,6 +125,10 @@ class App extends Component {
         ) : (
           <h1 className="justify-content-center">Oops No Movies Found !</h1>
         )}
+          </Route>
+          <Route path="/moviepage" exact component={MoviePage}></Route>
+        </Switch>
+        
 
         </div>
       </Router>
