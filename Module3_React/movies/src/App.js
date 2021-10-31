@@ -3,6 +3,7 @@ import Header from "./Components/Header/Header.jsx";
 import Movies from "./Components/Movies/Movies.jsx";
 import Pagination from "./Components/Pagination/Pagination.jsx";
 import MoviePage from "./Components/MoviePage/MoviePage.jsx";
+import HomeView from "./Components/HomeView/HomeView.jsx";
 import axios from "axios";
 import { API_KEY, API_URL, IMAGE_URL } from "./API/secrets.js";
 import {BrowserRouter as Router,Switch,Route} from "react-router-dom";
@@ -108,9 +109,9 @@ class App extends Component {
 
         {/*condition rendering*/}
         <Switch>
-          {/* <Route path="/" exact>
+          <Route path="/" exact>
             <HomeView></HomeView>
-          </Route> */}
+          </Route>
           <Route path="/more" exact>
           {this.state.moviesData.length ? (
           <React.Fragment>

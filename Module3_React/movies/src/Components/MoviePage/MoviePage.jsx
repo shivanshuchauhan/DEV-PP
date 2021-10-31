@@ -12,7 +12,7 @@ import {API_URL, API_KEY} from "../../API/secrets";
      async componentDidMount() {
          // https://api.themoviedb.org/3/movie/324552/videos?api_key=bdd243ea847239dc0799805e63e189f0&language=en-US
          let response = await axios.get(
-             `${API_URL}/movie/${this.props.locations.state.id}/videos?api_key=${API_KEY}&language=en-US`
+             `${API_URL}/movie/${this.props.location.state.id}/videos?api_key=${API_KEY}&language=en-US`
          );
          console.log(response);
          let videoObject = response.data.results.filter((videoObj) =>{
@@ -59,3 +59,7 @@ import {API_URL, API_KEY} from "../../API/secrets";
  }
   
  export default MoviePage;
+
+
+
+
