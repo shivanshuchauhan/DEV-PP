@@ -11,28 +11,28 @@
 //go mod init myapp -> to create app with name myapp
 
 
-// package main
+package main
 
-// import (
-// 	"fyne.io/fyne/v2/app"
-// 	"fyne.io/fyne/v2/container"
-// 	"fyne.io/fyne/v2/widget"
-// )
+import (
+	"fyne.io/fyne/v2/app"
+	"fyne.io/fyne/v2/container"
+	"fyne.io/fyne/v2/widget"
+)
 
-// func main() {
-// 	a := app.New()
-// 	w := a.NewWindow("Hello")
+func main() {
+	a := app.New()
+	w := a.NewWindow("Hello")
 
-// 	hello := widget.NewLabel("Hello Fyne!")
-// 	w.SetContent(container.NewVBox(
-// 		hello,
-// 		widget.NewButton("Hi!", func() {
-// 			hello.SetText("Welcome :)")
-// 		}),
-// 	))
+	hello := widget.NewLabel("Hello Fyne!")
+	w.SetContent(container.NewVBox(
+		hello,
+		widget.NewButton("Hi!", func() {
+			hello.SetText("Welcome :)")
+		}),
+	))
 
-// 	w.ShowAndRun()
-// }
+	w.ShowAndRun()
+}
 
 
 // package main
@@ -108,26 +108,26 @@
 // }
 
 
-package main
-import(
-	"fmt"
-)
+// package main
+// import(
+// 	"fmt"
+// )
 
-func linearSearch(dataList []int,key int) bool{
-    for _, item:=range dataList{
-		if item==key{
-		   return true
-	    }
-	}
-	return false
-}
+// func linearSearch(dataList []int,key int) bool{
+//     for _, item:=range dataList{
+// 		if item==key{
+// 		   return true
+// 	    }
+// 	}
+// 	return false
+// }
 
 
 
-func main(){
-    arr:=[]int{1,2,3,4,5}
-	fmt.Println(linearSearch(arr,4))
-}
+// func main(){
+//     arr:=[]int{1,2,3,4,5}
+// 	fmt.Println(linearSearch(arr,4))
+// }
 
 
 
