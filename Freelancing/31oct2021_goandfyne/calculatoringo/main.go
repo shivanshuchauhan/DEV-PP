@@ -1,134 +1,175 @@
-// package main 
-// import(
-// 	"fmt"
-// )
-
-// func main(){
-// 	fmt.Print("hello from go")
-// }
-
-//go run main.go ->to run this file
-//go mod init myapp -> to create app with name myapp
-
-
 package main
 
 import (
+	"strconv"
 	"fyne.io/fyne/v2/app"
 	"fyne.io/fyne/v2/container"
 	"fyne.io/fyne/v2/widget"
+	"github.com/Knetic/govaluate"
 )
 
 func main() {
 	a := app.New()
-	w := a.NewWindow("Hello")
+	w := a.NewWindow("Calculator")
+    //w.Resize(fyne.Newsize(500,280))
 
-	hello := widget.NewLabel("Hello Fyne!")
+	output:=""
+	input := widget.NewLabel(output)
+
+    isHistory:=false;
+	historyStr := ""
+	history:= widget.NewLabel(historyStr);
+    var historyArr []string;
+	historybtn :=widget.NewButton("history",func(){
+		if isHistory{
+			historyStr=""
+		}else{
+            for i:=len(historyArr)-1;i>=0;i-- {
+				historyStr = historyStr+historyArr[i];
+				historyStr+="\n";
+			}
+		}
+		isHistory=!isHistory;
+        history.SetText(historyStr);
+	})
+	backbtn :=widget.NewButton("back",func(){
+		if len(output)>0{
+            output=output[:len(output)-1];
+	     	input.SetText(output);
+		}
+		
+	})
+	clearbtn :=widget.NewButton("clear",func(){
+		output="";
+		input.SetText(output);
+	})
+	openbtn :=widget.NewButton("(",func(){
+		output=output+"(";
+		input.SetText(output);
+	})
+	closebtn :=widget.NewButton(")",func(){
+		output=output+")";
+		input.SetText(output);
+	})
+    dividebtn :=widget.NewButton("/",func(){
+		output=output+"/";
+		input.SetText(output);
+	})
+	sevenbtn :=widget.NewButton("7",func(){
+		output=output+"7";
+		input.SetText(output);
+	})
+	eightbtn :=widget.NewButton("8",func(){
+		output=output+"8";
+		input.SetText(output);
+	})
+	ninebtn :=widget.NewButton("9",func(){
+		output=output+"9";
+		input.SetText(output);
+	})
+	multiplybtn :=widget.NewButton("*",func(){
+		output=output+"*";
+		input.SetText(output);
+	})
+	fourbtn :=widget.NewButton("4",func(){
+		output=output+"4";
+		input.SetText(output);
+	})
+	fivebtn :=widget.NewButton("5",func(){
+		output=output+"5";
+		input.SetText(output);
+	})
+	sixbtn :=widget.NewButton("6",func(){
+		output=output+"6";
+		input.SetText(output);
+	})
+	minusbtn :=widget.NewButton("-",func(){
+		output=output+"-";
+		input.SetText(output);
+	})
+	onebtn :=widget.NewButton("1",func(){
+		output=output+"1";
+		input.SetText(output);
+	})
+	twobtn :=widget.NewButton("2",func(){
+		output=output+"2";
+		input.SetText(output);
+	})
+	threebtn :=widget.NewButton("3",func(){
+		output=output+"3";
+		input.SetText(output);
+	})
+	plusbtn :=widget.NewButton("+",func(){
+		output=output+"+";
+		input.SetText(output);
+	})
+	zerobtn :=widget.NewButton("0",func(){
+		output=output+"0";
+		input.SetText(output);
+	})
+	dotbtn :=widget.NewButton(".",func(){
+		output=output+".";
+		input.SetText(output);
+	})
+	equalbtn :=widget.NewButton("=",func(){
+		expression, err := govaluate.NewEvaluableExpression(output);
+		if err==nil{
+            result, err := expression.Evaluate(nil);
+			if err==nil{
+				ans:=strconv.FormatFloat(result.(float64),'f',-1,64);
+				strToAppend:=output+" = "+ans;
+				historyArr = append(historyArr, strToAppend);
+				output = ans;
+			}else{
+				output="error";
+			}
+		}else{
+			output="error";
+		}
+	    input.SetText(output);
+	})
+
+	
 	w.SetContent(container.NewVBox(
-		hello,
-		widget.NewButton("Hi!", func() {
-			hello.SetText("Welcome :)")
-		}),
-	))
+		input,
+		history,
+		container.NewGridWithColumns(1,
+		     container.NewGridWithColumns(2,
+			 historybtn,
+		     backbtn,
+		     ),
+			 container.NewGridWithColumns(4,
+			 clearbtn,
+		     openbtn,
+			 closebtn,
+			 dividebtn),
+			 container.NewGridWithColumns(4,
+			 sevenbtn,
+			 eightbtn,
+			 ninebtn,
+			 multiplybtn),
+			 container.NewGridWithColumns(4,
+			 fourbtn,
+			 fivebtn,
+			 sixbtn,
+			 minusbtn),
+			 container.NewGridWithColumns(4,
+			 onebtn,
+			 twobtn,
+			 threebtn,
+			 plusbtn),
+			 container.NewGridWithColumns(2,
+			 container.NewGridWithColumns(2,
+				zerobtn,
+				dotbtn,),
+			 equalbtn,),),
+		// widget.NewButton("Hi!", func() {
+		// 	hello.SetText("Welcome :)")
+		// }),
+	),)
 
 	w.ShowAndRun()
 }
-
-
-// package main
-
-// import (
-// 	"fmt"
-// 	"math"
-// )
-
-// func printPrimeNumbers(num1,num2 int){
-// 	if num1<2 || num2<2 {
-// 		fmt.Println("numbers must be greater than 2")
-// 		return
-// 	}
-
-//     for num1<=num2{
-// 		isPrime:=true//this is shorthand syntax , cant be used out of function
-        
-//         for i:=2 ; i<=int(math.Sqrt(float64(num1))) ; i++{
-// 			if num1 %1==0{
-// 				isPrime = false
-// 				break
-// 			}
-// 		}
-
-// 		if isPrime{
-// 			fmt.Printf("%d ",num1)
-// 		}
-// 		num1++;
-// 	}
-// 	fmt.Println()
-
-// }
-
-// func main(){
-// 	//fmt.Print("Hello from GO")
-// 	printPrimeNumbers(5,15)
-// }
-
-// package main
-// import(
-// 	"fmt"
-// )
-
-// func printBar(arr [5] int){
-// 	var max int = 0
-
-// 	for i:=0 ; i<len(arr);i++{
-// 		if(max<arr[i]){
-// 			max=arr[i]
-// 		}
-// 	}
-
-// 	for i:=max;i>=0;i--{
-// 		var str string = ""
-
-// 		for j:=0;j<len(arr);j++{
-// 			if(arr[j]<=i){
-// 				str=str+" \t"
-// 			}else{
-// 				str=str+"*\t"
-// 			}
-// 		}
-// 		fmt.Println(str)
-// 	}
-// }
-
-
-
-// func main(){
-//     arr:=[5]int{5,3,2,5,4}
-// 	printBar(arr)
-// }
-
-
-// package main
-// import(
-// 	"fmt"
-// )
-
-// func linearSearch(dataList []int,key int) bool{
-//     for _, item:=range dataList{
-// 		if item==key{
-// 		   return true
-// 	    }
-// 	}
-// 	return false
-// }
-
-
-
-// func main(){
-//     arr:=[]int{1,2,3,4,5}
-// 	fmt.Println(linearSearch(arr,4))
-// }
-
 
 
 
