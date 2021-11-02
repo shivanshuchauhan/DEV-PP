@@ -12,6 +12,7 @@ import (
 	"fyne.io/fyne/v2/canvas"
 	"fyne.io/fyne/v2/container"
 	"fyne.io/fyne/v2/widget"
+	//"fyne.io/fyne/v2/data/binding"
 )
 func main() {
 	a:=app.New()
@@ -19,9 +20,10 @@ func main() {
 	w:=a.NewWindow("Weather App Pep")
 
 	w.Resize(fyne.NewSize(500,500))
+	city:="noida"
 
 	//API part
-	res , err:=http.Get("http://api.openweathermap.org/data/2.5/weather?q=noida&APPID=a590678d19eb755dba62d0ee37b2d7a6")
+	res , err:=http.Get("http://api.openweathermap.org/data/2.5/weather?q="+city+"&APPID=a590678d19eb755dba62d0ee37b2d7a6")
 	if err!=nil{
 		fmt.Println(err)
 	}
@@ -37,21 +39,55 @@ func main() {
 	if err!=nil{
 		fmt.Println(err)
 	}
-
-	img:=canvas.NewImageFromFile("weather.jpg")
-	//img.FillMode = canvas.ImageFillOriginal
-
-	combo:=widget.NewSelect([]string{"Mumbai","Noida","Chennai"},func(value string){
-		log.Println("Select set to",value)
-	})
-
-	label1:= canvas.NewText("Weather Details",color.White)
+	label1:= canvas.NewText("Weather Details of "+city,color.White)
 	label1.TextStyle=fyne.TextStyle{Bold: true}
 
 	label2 := canvas.NewText(fmt.Sprintf("Country %s",weather.Sys.Country),color.White)
 	label3 := canvas.NewText(fmt.Sprintf("Wind Speed %.2f",weather.Wind.Speed),color.White)
 	label4 := canvas.NewText(fmt.Sprintf("Temprature %.2f",weather.Main.Temp),color.White)
 	label5 := canvas.NewText(fmt.Sprintln("Humidity",weather.Main.Humidity),color.White)
+	// label1:=widget.NewLabel("Weather details of "+city)
+	// conf:=binding.NewFloat()
+	// con:=binding.FloatToString(conf)
+	// conf.Set(weather.Sys.Country)
+	// label2:=widget.NewLabel("Country "+con)
+    // label3:=widget.NewLabel("Wind Speed %.2f"+binding.FloatToString(weather.Wind.Speed))
+	// label4:=widget.NewLabel("Temprature %.2f"+binding.FloatToString(weather.Main.Temp))
+	// label5:=widget.NewLabel("Humidity"+binding.FloatToString(weather.Main.Humidity))
+
+	img:=canvas.NewImageFromFile("weather.jpg")
+	//img.FillMode = canvas.ImageFillOriginal
+
+	combo:=widget.NewSelect([]string{"Mumbai","Noida","Chennai"},func(value string){
+		log.Println("Select set to",value)
+		// city=value
+
+		// res , err:=http.Get("http://api.openweathermap.org/data/2.5/weather?q="+city+"&APPID=a590678d19eb755dba62d0ee37b2d7a6")
+	    // if err!=nil{
+		//     fmt.Println(err)
+	    // }
+
+	    // defer res.Body.Close()
+
+	    // body , err:=ioutil.ReadAll(res.Body)
+	    // if err!=nil{
+		//     fmt.Println(err)
+	    // }
+
+	    // weather , err:=UnmarshalWelcome(body)
+	    // if err!=nil{
+		//     fmt.Println(err)
+	    // }
+		// label1.SetText("Weather details of "+city)
+		// f.Set(weather.Sys.Country)
+		//label2.SetText("Country %s"+weather.Sys.Country)
+		// label3.SetText("Wind Speed %.2f"+weather.Wind.Speed)
+		// label4.SetText("Temprature %.2f"+weather.Main.Temp)
+		//label5.SetText("Humidity",weather.Main.Humidity)
+
+    })
+
+	
 
     w.SetContent(
 		container.NewVBox(
