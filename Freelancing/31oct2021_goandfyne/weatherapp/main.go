@@ -15,11 +15,12 @@ import (
 	//"fyne.io/fyne/v2/data/binding"
 )
 func main() {
+//func showWeatherApp(w fyne.Window){}
 	a:=app.New()
 
-	w:=a.NewWindow("Weather App Pep")
+    w:=a.NewWindow("Weather App Pep")
 
-	w.Resize(fyne.NewSize(500,500))
+    w.Resize(fyne.NewSize(500,500))
 	city:="noida"
 
 	//API part
@@ -100,7 +101,8 @@ func main() {
 			label5,
 		),
 	)
-
+    //w.SetContent(container.NewBorder(panelContent,nil,nil,nil.weatherContainer),)
+	//w.Show()
 	w.ShowAndRun()
 }
 
