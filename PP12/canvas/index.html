@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- <h1> Canvas example</h1> -->
+    <canvas></canvas>
+    <style>
+        body {
+            margin: 0px;
+        }
+    </style>
+</body>
+<script>
+    let canvasBoard=document.querySelector("canvas");
+    canvasBoard.height=window.innerHeight;
+    canvasBoard.width=window.innerWidth/2;
+    
+    let tool=canvasBoard.getContext("2d");
+    tool.fillStyle="blue";
+    //tool.fillRect(0, 0, 200, 200);
+    //tool.strokeRect(30, 20, 200, 200);
+    
+    let iX, iY, fX, fY;
+    let body= document.querySelector("body");
+    body.addEventListener("mousedown",
+        function (e) {
+            iX=e.clientX;
+            iY=e.clientY;
+        }
+    )
+
+    body.addEventListener("mouseup",
+        function (e) {
+            fX=e.clientX;
+            fY=e.clientY;
+            let height=fY-iY;
+            let width=fX-iX;
+            tool.strokeRect(iX,iY, width, height);
+        }
+    )
+    
+</script>
+</html>
