@@ -30,31 +30,42 @@
     canvasBoard.width=window.innerWidth/2;
     
     let tool=canvasBoard.getContext("2d");
-    // tool.beginPath();
-    // tool.moveTo(0, 30);
-    // tool.lineTo(300, 150);
-    // tool.stroke();
+    
     tool.fillStyle="blue";
-    
-    
+
+    let cicon;
+    let rectTool= document.querySelector(".fa-square");
+    let lineTool =  document.querySelector(".fa-grip-lines-vertical");
+    rectTool.addEventListener("click", function() {
+        cicon="rectTool";
+    })
+    lineTool.addEventListener("click", function() {
+        cicon="lineTool";
+    })
+
+
     let iX, iY, fX, fY;
     let body= document.querySelector("body");
-    body.addEventListener("mousedown",
-        function (e) {
-            iX=e.clientX;
+    body.addEventListener("mousedown",function (e) {
+            iX=e.clientX-canvasBoard.getBoundingClientRect().left;
             iY=e.clientY;
-        }
-    )
+    })
 
-    body.addEventListener("mouseup",
-        function (e) {
-            fX=e.clientX;
+    body.addEventListener("mouseup",function (e) {
+            fX=e.clientX-canvasBoard.getBoundingClientRect().left;
             fY=e.clientY;
-            let height=fY-iY;
-            let width=fX-iX;
-            tool.strokeRect(iX,iY, width, height);
-        }
-    )
+            
+            if(cicon=="rectTool"){
+                let height=fY-iY;
+                let width=fX-iX;
+                tool.strokeRect(iX,iY, width, height);
+            }else if(cicon=="lineTool"){
+                tool.beginPath();
+                tool.moveTo(iX,iY);
+                tool.lineTo(fX,fY);
+                tool.stroke();
+            }
+    })
     
 </script>
 </html>
