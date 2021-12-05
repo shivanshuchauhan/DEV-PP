@@ -5,15 +5,24 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-</head>
-<body>
-    <!-- <h1> Canvas example</h1> -->
-    <canvas></canvas>
     <style>
         body {
             margin: 0px;
         }
+        .fas {
+            font-size: 2rem;
+            margin-right:30px;
+            margin-left:30px;
+        }
     </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    
+    <i class="fas fa-square"></i>
+    <i class="fas fa-grip-lines-vertical"></i>
+    <canvas></canvas>
+    
 </body>
 <script>
     let canvasBoard=document.querySelector("canvas");
@@ -21,9 +30,12 @@
     canvasBoard.width=window.innerWidth/2;
     
     let tool=canvasBoard.getContext("2d");
+    // tool.beginPath();
+    // tool.moveTo(0, 30);
+    // tool.lineTo(300, 150);
+    // tool.stroke();
     tool.fillStyle="blue";
-    //tool.fillRect(0, 0, 200, 200);
-    //tool.strokeRect(30, 20, 200, 200);
+    
     
     let iX, iY, fX, fY;
     let body= document.querySelector("body");
