@@ -48,6 +48,7 @@
     let body= document.querySelector("body");
     body.addEventListener("mousedown",function (e) {
             iX=e.clientX-canvasBoard.getBoundingClientRect().left;
+            //canvasBoard.getBoundingClientRect().left ->it gives distance of canvas from left side of the window
             iY=e.clientY;
     })
 
