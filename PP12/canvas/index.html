@@ -14,13 +14,40 @@
             margin-right:30px;
             margin-left:30px;
         }
+        .red {
+            background-color: red;
+            height: 20px;
+            width: 20px;
+            border-radius: 50%;
+        }
+        .blue {
+            background-color: lightblue;
+            height: 20px;
+            width: 20px;
+            border-radius: 50%;
+        }
+        .green {
+            background-color: green;
+            height: 20px;
+            width: 20px;
+            border-radius: 50%;
+        }
+        .outer {
+            display: flex;
+        }
     </style>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
     
-    <i class="fas fa-square"></i>
-    <i class="fas fa-grip-lines-vertical"></i>
+    
+    <div class="outer">
+        <i class="fas fa-square"></i>
+        <i class="fas fa-grip-lines-vertical"></i>
+        <div class="red"></div>
+        <div class="blue"></div>
+        <div class="green"></div>
+    </div>
     <canvas></canvas>
     
 </body>
@@ -28,11 +55,15 @@
     let canvasBoard=document.querySelector("canvas");
     canvasBoard.height=window.innerHeight;
     canvasBoard.width=window.innerWidth/2;
+    let redDiv=document.querySelector(".red");
+    let blueDiv=document.querySelector(".blue");
+    let greenDiv=document.querySelector(".green");
+    let cColor="red";
     
     let tool=canvasBoard.getContext("2d");
     
     tool.fillStyle="blue";
-    tool.strokeStyle="red";
+    tool.strokeStyle=cColor;
 
     let cicon;
     let rectTool= document.querySelector(".fa-square");
@@ -44,18 +75,20 @@
         cicon="lineTool";
     })
 
+    
+
 
     let iX, iY, fX, fY;
     let body= document.querySelector("body");
     body.addEventListener("mousedown",function (e) {
             iX=e.clientX-canvasBoard.getBoundingClientRect().left;
             //canvasBoard.getBoundingClientRect().left ->it gives distance of canvas from left side of the window
-            iY=e.clientY;
+            iY=e.clientY-canvasBoard.getBoundingClientRect().top;
     })
 
     body.addEventListener("mouseup",function (e) {
             fX=e.clientX-canvasBoard.getBoundingClientRect().left;
-            fY=e.clientY;
+            fY=e.clientY-canvasBoard.getBoundingClientRect().top;
             
             if(cicon=="rectTool"){
                 let height=fY-iY;
@@ -67,6 +100,21 @@
                 tool.lineTo(fX,fY);
                 tool.stroke();
             }
+    })
+    redDiv.addEventListener("click", function(){
+       cColor="red";
+       tool.strokeStyle=cColor;
+       console.log("red");
+    })
+    blueDiv.addEventListener("click", function(){
+       cColor="blue";
+       tool.strokeStyle=cColor;
+       console.log("blue");
+    })
+    greenDiv.addEventListener("click", function(){
+       cColor="green";
+       tool.strokeStyle=cColor;
+       console.log("green");
     })
     
 </script>
