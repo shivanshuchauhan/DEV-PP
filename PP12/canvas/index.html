@@ -32,90 +32,101 @@
             width: 20px;
             border-radius: 50%;
         }
-        .outer {
+        .icon-pallet {
             display: flex;
+            height: 50px;
+            background-color: rgb(228, 227, 227);
+            width: 800px;
+            margin-left: 100px;
+            align-items: center;
+            justify-content: space-evenly;
         }
     </style>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
-    
-    
-    <div class="outer">
+    <div class="icon-pallet">
         <i class="fas fa-square"></i>
         <i class="fas fa-grip-lines-vertical"></i>
+        <i class="fas fa-pencil-alt"></i>
         <div class="red"></div>
         <div class="blue"></div>
         <div class="green"></div>
     </div>
     <canvas></canvas>
-    
 </body>
 <script>
     let canvasBoard=document.querySelector("canvas");
+    let tool=canvasBoard.getContext("2d");
     canvasBoard.height=window.innerHeight;
     canvasBoard.width=window.innerWidth/2;
+    let iX, iY, fX, fY, mousedown=false;
+    let body= document.querySelector("body");
     let redDiv=document.querySelector(".red");
     let blueDiv=document.querySelector(".blue");
     let greenDiv=document.querySelector(".green");
-    let cColor="red";
-    
-    let tool=canvasBoard.getContext("2d");
-    
-    tool.fillStyle="blue";
-    tool.strokeStyle=cColor;
-
-    let cicon;
     let rectTool= document.querySelector(".fa-square");
-    let lineTool =  document.querySelector(".fa-grip-lines-vertical");
+    let lineTool = document.querySelector(".fa-grip-lines-vertical");
+    let pencilTool= document.querySelector(".fa-pencil-alt");
+    let cTool;
     rectTool.addEventListener("click", function() {
-        cicon="rectTool";
+        cTool="rectTool";
     })
     lineTool.addEventListener("click", function() {
-        cicon="lineTool";
+        cTool="lineTool";
     })
-
+    pencilTool.addEventListener("click", function(){
+        cTool="pencil";
+    })
+    redDiv.addEventListener("click", function(){
+       tool.strokeStyle="red";
+    })
+    blueDiv.addEventListener("click", function(){
+       tool.strokeStyle="lightblue";
+    })
+    greenDiv.addEventListener("click", function(){
+       tool.strokeStyle="green";
+    })
     
-
-
-    let iX, iY, fX, fY;
-    let body= document.querySelector("body");
     body.addEventListener("mousedown",function (e) {
-            iX=e.clientX-canvasBoard.getBoundingClientRect().left;
-            //canvasBoard.getBoundingClientRect().left ->it gives distance of canvas from left side of the window
+            mousedown=true;
+            iX=e.clientX-canvasBoard.getBoundingClientRect().left; //canvasBoard.getBoundingClientRect().left ->it gives distance of canvas from left side of the window
             iY=e.clientY-canvasBoard.getBoundingClientRect().top;
+            if(cTool=="pencil"){
+                tool.beginPath();
+                tool.moveTo(iX,iY);
+            }
     })
-
     body.addEventListener("mouseup",function (e) {
+            mousedown=false;
             fX=e.clientX-canvasBoard.getBoundingClientRect().left;
             fY=e.clientY-canvasBoard.getBoundingClientRect().top;
-            
-            if(cicon=="rectTool"){
+            if(cTool=="rectTool"){
                 let height=fY-iY;
                 let width=fX-iX;
                 tool.strokeRect(iX,iY, width, height);
-            }else if(cicon=="lineTool"){
+            }else if(cTool=="lineTool"){
                 tool.beginPath();
                 tool.moveTo(iX,iY);
                 tool.lineTo(fX,fY);
                 tool.stroke();
             }
     })
-    redDiv.addEventListener("click", function(){
-       cColor="red";
-       tool.strokeStyle=cColor;
-       console.log("red");
-    })
-    blueDiv.addEventListener("click", function(){
-       cColor="blue";
-       tool.strokeStyle=cColor;
-       console.log("blue");
-    })
-    greenDiv.addEventListener("click", function(){
-       cColor="green";
-       tool.strokeStyle=cColor;
-       console.log("green");
-    })
     
+    body.addEventListener("mousemove", function(e){
+        if(mousedown==true && cTool=="pencil"){
+            fX=e.clientX-canvasBoard.getBoundingClientRect().left;
+            fY=e.clientY-canvasBoard.getBoundingClientRect().top;
+            tool.lineTo(fX, fY);
+            tool.stroke();
+        }
+    })
+
+    
+    // tool.moveTo(200,300);
+    // tool.lineTo(300,400);
+    // tool.stroke();
+    // tool.lineTo(300,200);
+    // tool.stroke();
 </script>
 </html>
