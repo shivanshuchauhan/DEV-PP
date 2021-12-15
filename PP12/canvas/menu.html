@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .toolbar {
+            border: 1px solid gray;
+            border-radius: 4px;
+            width: 80vw;
+            height: 60px;
+            margin: 0 auto;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-evenly;
+        }
+        .fas {
+            font-size: 2rem;
+            margin-right:30px;
+            margin-left:30px;
+        }
+        .red {
+            background-color: red;
+            height: 25px;
+            width: 25px;
+            border-radius: 50%;
+        }
+        .blue {
+            background-color: lightblue;
+            height: 25px;
+            width: 25px;
+            border-radius: 50%;
+        }
+        .green {
+            background-color: green;
+            height: 25px;
+            width: 25px;
+            border-radius: 50%;
+        }
+        .color-container{
+            display: flex;
+            width: 80px;
+            justify-content: space-evenly;
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <div class="toolbar">
+        <div class="tool pencil">
+            <img src="./NewIcons/Black_Pencil.svg" heigth="40" width="40">
+            <div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+            </div>
+        </div>
+        <div class="tool eraser"><img src="NewIcons/Eraser.svg" heigth="40" width="40"></div>
+        <div class="tool fas fa-square"></div>
+        <div class="fas fa-grip-lines-vertical"></div>
+        <div class="color-container">
+            <div class="color red"></div>
+            <div class="color green"></div>
+            <div class="color blue"></div>
+        </div>
+    </div>
+</body>
+</html>
