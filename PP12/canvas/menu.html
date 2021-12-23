@@ -75,6 +75,7 @@
             options[0].style.display = "flex";
         }else{
             cTool="pencil";
+            tool.strokeStyle="red";
             for(let i=0;i<options.length;i++) {
                 options[i].style.display = "none";
             }   
@@ -85,6 +86,7 @@
             options[1].style.display = "flex";
         }else{
             cTool="eraser";
+            tool.strokeStyle="white";
             for(let i=0;i<options.length;i++) {
                 options[i].style.display = "none";
             }   
@@ -128,7 +130,7 @@
             mousedown=true;
             iX=e.clientX-canvasBoard.getBoundingClientRect().left; //canvasBoard.getBoundingClientRect().left ->it gives distance of canvas from left side of the window
             iY=e.clientY-canvasBoard.getBoundingClientRect().top;
-            if(cTool=="pencil"){
+            if(cTool=="pencil" || cTool=="eraser"){
                 tool.beginPath();
                 tool.moveTo(iX,iY);
             }
@@ -150,12 +152,44 @@
     })
     
     body.addEventListener("mousemove", function(e){
-        if(mousedown==true && cTool=="pencil"){
-            fX=e.clientX-canvasBoard.getBoundingClientRect().left;
-            fY=e.clientY-canvasBoard.getBoundingClientRect().top;
-            tool.lineTo(fX, fY);
-            tool.stroke();
+        if(mousedown==true){
+            if(cTool=="pencil" || cTool=="eraser"){
+                fX=e.clientX-canvasBoard.getBoundingClientRect().left;
+                fY=e.clientY-canvasBoard.getBoundingClientRect().top;
+                tool.lineTo(fX, fY);
+                tool.stroke();
+            }
+            
         }
     })
+
+    let pencilSize=5;
+    let rectSize=5;
+    let eraserSize=5;
+    let lineSize=5;
+
+    let sizeBoxArr=document.querySelectorAll(".size-container");
+    sizeBoxArr[0].addEventListener("click", function(e){
+        let elems=["size1","size2","size3","size4"];
+        let allTheClasses=e.target.classList;
+        let firstClass=allTheClasses[0];
+        let test=elems.includes(firstClass);
+        if(test){
+            if(firstClass=="size1"){
+                pencilSize=5;         
+            }else if(firstClass=="size2"){
+                pencilSize=10;
+            }else if(firstClass=="size3"){
+                pencilSize=15;
+            }else if(firstClass=="size4"){
+                pencilSize=20;
+            }
+        }
+        tool.lineWidth=pencilSize;
+    })
+    sizeBoxArr[1].addEventListener("click", function(e){
+        
+    })
+
 </script>
 </html>
