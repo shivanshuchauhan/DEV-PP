@@ -69,13 +69,28 @@
     let eraserTool= document.querySelector(".eraser");
     let pencilTool = document.querySelector(".pencil");
     let options=document.querySelectorAll(".size-container");
+    let colorOptions=document.querySelectorAll(".color")
     let cTool;
+    let pencilColor="red";
+    let rectColor="red";
+    let lineColor="red";
     pencilTool.addEventListener("click", function(){
         if(cTool=="pencil"){
             options[0].style.display = "flex";
         }else{
             cTool="pencil";
-            tool.strokeStyle="red";
+            tool.strokeStyle=pencilColor;
+            for(let i=0;i<colorOptions.length;i++){
+                colorOptions[i].style.borderStyle="none";
+            }
+            if(pencilColor=="red"){
+                colorOptions[0].style.borderStyle="solid";
+            }else if(pencilColor=="green"){
+                colorOptions[1].style.borderStyle="solid";
+            }else if(pencilColor=="blue"){
+                colorOptions[2].style.borderStyle="solid";
+            }
+            
             for(let i=0;i<options.length;i++) {
                 options[i].style.display = "none";
             }   
@@ -98,6 +113,17 @@
             options[2].style.display = "flex";
         }else{
             cTool="rectTool";
+            tool.strokeStyle=rectColor;
+            for(let i=0;i<colorOptions.length;i++){
+                colorOptions[i].style.borderStyle="none";
+            }
+            if(rectColor=="red"){
+                colorOptions[0].style.borderStyle="solid";
+            }else if(rectColor=="green"){
+                colorOptions[1].style.borderStyle="solid";
+            }else if(rectColor=="blue"){
+                colorOptions[2].style.borderStyle="solid";
+            }
             for(let i=0;i<options.length;i++) {
                 options[i].style.display = "none";
             }
@@ -109,6 +135,17 @@
             options[3].style.display = "flex";
         }else{
             cTool="lineTool";
+            tool.strokeStyle=lineColor;
+            for(let i=0;i<colorOptions.length;i++){
+                colorOptions[i].style.borderStyle="none";
+            }
+            if(lineColor=="red"){
+                colorOptions[0].style.borderStyle="solid";
+            }else if(lineColor=="green"){
+                colorOptions[1].style.borderStyle="solid";
+            }else if(lineColor=="blue"){
+                colorOptions[2].style.borderStyle="solid";
+            }
             for(let i=0;i<options.length;i++) {
                 options[i].style.display = "none";
             }   
@@ -116,15 +153,57 @@
     })
     
     redDiv.addEventListener("click", function(){
-       tool.strokeStyle="red";
-       colorArea.style.backgroundColor="red";
-    })
-    blueDiv.addEventListener("click", function(){
-       tool.strokeStyle="lightblue";
+        for(let i=0;i<colorOptions.length;i++){
+                colorOptions[i].style.borderStyle="none";
+            }
+        colorOptions[0].style.borderStyle="solid";
+        if(cTool=="pencil"){
+            pencilColor="red";
+            tool.strokeStyle="red";
+        }else if(cTool=="rectTool"){
+            rectColor="red";
+            tool.strokeStyle="red";
+        }else if(cTool=="lineTool"){
+            lineTool="red";
+            tool.strokeStyle="red";
+        }
+       //tool.strokeStyle="red";
+       //colorArea.style.backgroundColor="red";
     })
     greenDiv.addEventListener("click", function(){
-       tool.strokeStyle="green";
+        for(let i=0;i<colorOptions.length;i++){
+                colorOptions[i].style.borderStyle="none";
+            }
+        colorOptions[1].style.borderStyle="solid";
+        if(cTool=="pencil"){
+            pencilColor="green";
+            tool.strokeStyle="green";
+        }else if(cTool=="rectTool"){
+            rectColor="green";
+            tool.strokeStyle="green";
+        }else if(cTool=="lineTool"){
+            lineTool="green";
+            tool.strokeStyle="green";
+        }
     })
+    blueDiv.addEventListener("click", function(){
+        for(let i=0;i<colorOptions.length;i++){
+                colorOptions[i].style.borderStyle="none";
+            }
+        colorOptions[2].style.borderStyle="solid";
+        if(cTool=="pencil"){
+            pencilColor="blue";
+            tool.strokeStyle="blue";
+        }else if(cTool=="rectTool"){
+            rectColor="blue";
+            tool.strokeStyle="blue";
+        }else if(cTool=="lineTool"){
+            lineTool="blue";
+            tool.strokeStyle="blue";
+        }
+       
+    })
+    
     
     body.addEventListener("mousedown",function (e) {
             mousedown=true;
@@ -172,6 +251,7 @@
     sizeBoxArr[0].addEventListener("click", function(e){
         let elems=["size1","size2","size3","size4"];
         let allTheClasses=e.target.classList;
+        console.log(e);
         let firstClass=allTheClasses[0];
         let test=elems.includes(firstClass);
         if(test){
@@ -188,7 +268,61 @@
         tool.lineWidth=pencilSize;
     })
     sizeBoxArr[1].addEventListener("click", function(e){
-        
+        let elems=["size1","size2","size3","size4"];
+        let allTheClasses=e.target.classList;
+        console.log(e);
+        let firstClass=allTheClasses[0];
+        let test=elems.includes(firstClass);
+        if(test){
+            if(firstClass=="size1"){
+                eraserSize=5;         
+            }else if(firstClass=="size2"){
+                eraserSize=10;
+            }else if(firstClass=="size3"){
+                eraserSize=15;
+            }else if(firstClass=="size4"){
+                eraserSize=20;
+            }
+        }
+        tool.lineWidth=eraserSize;   
+    })
+    sizeBoxArr[2].addEventListener("click", function(e){
+        let elems=["size1","size2","size3","size4"];
+        let allTheClasses=e.target.classList;
+        console.log(e);
+        let firstClass=allTheClasses[0];
+        let test=elems.includes(firstClass);
+        if(test){
+            if(firstClass=="size1"){
+                rectSize=5;         
+            }else if(firstClass=="size2"){
+                rectSize=10;
+            }else if(firstClass=="size3"){
+                rectSize=15;
+            }else if(firstClass=="size4"){
+                rectSize=20;
+            }
+        }
+        tool.lineWidth=rectSize;   
+    })
+    sizeBoxArr[3].addEventListener("click", function(e){
+        let elems=["size1","size2","size3","size4"];
+        let allTheClasses=e.target.classList;
+        console.log(e);
+        let firstClass=allTheClasses[0];
+        let test=elems.includes(firstClass);
+        if(test){
+            if(firstClass=="size1"){
+                lineSize=5;         
+            }else if(firstClass=="size2"){
+                lineSize=10;
+            }else if(firstClass=="size3"){
+                lineSize=15;
+            }else if(firstClass=="size4"){
+                lineSize=20;
+            }
+        }
+        tool.lineWidth=lineSize;   
     })
 
 </script>
