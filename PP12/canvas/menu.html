@@ -44,11 +44,15 @@
                 <div class="size4"></div>
             </div>
         </div>
+        <div class="tool" id="sticky">
+            <img src="NewIcons/StickyNote.svg" heigth="35" width="35"> 
+        </div>
         <div class="color-container">
             <div class="color red"></div>
             <div class="color green"></div>
             <div class="color blue"></div>
         </div>
+        
     </div>
     <canvas></canvas>
 </body>
@@ -323,6 +327,29 @@
             }
         }
         tool.lineWidth=lineSize;   
+    })
+
+    let sticky = document.querySelector("#sticky");
+    sticky.addEventListener("click", function (e) {
+        let sticky = document.createElement("div");
+        sticky.setAttribute("class", "sticky");
+        sticky.innerHTML = '<div class="navbar"> <div class="close"></div> <div class="minimize"></div> <textarea name="" class="textarea"></textarea>'
+        body.appendChild(sticky);
+        let minimize = sticky.querySelector(".minimize");
+        let close = sticky.querySelector(".close");
+        let textArea= sticky.querySelector("textarea");
+        let isClosed = false;
+        minimize.addEventListener("click", function(e){
+            if(isClosed==true){
+                textArea.style.display = "none";
+            }else{
+                textArea.style.display = "block";
+            }
+            isClosed = !isClosed;
+        })
+        close.addEventListener("click", function(){
+            sticky.remove();
+        })
     })
 
 </script>
